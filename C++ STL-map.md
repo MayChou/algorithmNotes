@@ -77,5 +77,4 @@ map < int ,string > ::iterator it;
 
 回想一下，所有容器都定义了 begin 和 end 成员，分别返回指向容器首元素和尾元素下一位置的迭代器。容器还定义了 rbegin 和 rend 成员，分别返回指向容器尾元素和首元素前一位置的反向迭代器。
 
-![](https://github.com/MayChou/algorithmNotes/tree/main/pictures/1.jpg)
-
+![](./pictures/1.jpg)
