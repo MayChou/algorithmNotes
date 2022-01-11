@@ -76,6 +76,8 @@ iterator 是标准库中的类，它具有指针的功能
    values.insert(vec.begin()+i,a);//在第i+1个元素前面插入a;
 ```
 
+注意在常用STL容器之中，只有在vector和string之中，才允许使用vi.begin()+3这种迭代器加上整数的写法
+
 *删除元素：*
 
 ```c++
@@ -117,5 +119,5 @@ a.swap(b);//a和b中数据进行整体交换
 
 [(11条消息) STL中list,vector,deque,map,set区别、联系和使用场景原理_从零开始学习的ZHL的博客-CSDN博客_vector和map的原理及区别](https://blog.csdn.net/qq_22080999/article/details/81199904)
 
-
+​	
 
