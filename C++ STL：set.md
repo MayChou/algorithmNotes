@@ -39,7 +39,9 @@ set<int> b(a.begin(), a.end()); // 将集合a中的所有元素作为集合b的�
 
 ```c++
 st.pop_back(const T& elem);//删除容器中值为 elem 的元素
-st.erase(iterator it);//删除it迭代器所指的元素
+st.erase(it);//it为所需要删除元素的迭代器
+st.erase(st.find(200));//就是利用迭代器，利用find()函数找到100，然后利用erase删除它
+st.erase(value);//value为所需要删除元素的值
 st.erase(iterator first, iterator last);//删除区间 [first,last] 之间的所有元素
 st.clear();//清空所有元素：
 ```
@@ -92,6 +94,8 @@ st1.swap(st2);
 
 **遍历元素：**
 
+注意set只能通过迭代器（iterator）访问。
+
 ```c++
 set<int>::iterator it;
 for (it = st.begin(); it != st.end(); it++)
@@ -105,3 +109,4 @@ for (it = st.begin(); it != st.end(); it++)
 - set 只能使用insert的两种重载函数插入，不支持 push_back() 和 push_front() 函数；
 - set 不支持 STL 里的 reverse 和 sort 算法；
 - set 能不通过迭代器，只通过元素值来删除该元素；
+
