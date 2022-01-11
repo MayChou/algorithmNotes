@@ -54,3 +54,32 @@ mapPerson.insert(map < int, string > ::value_type (2, "Tom"));
 mapPerson[3] = "Jerry";
 ```
 
+**遍历数据：**
+
+三种常见迭代方法：
+
+1）前向迭代器
+
+```c++
+map < int ,string > ::iterator it;
+    map < int ,string > ::iterator itEnd;
+    it = mapPerson.begin();
+    itEnd = mapPerson.end();
+    while (it != itEnd) {
+	cout<<it->first<<' '<<it->second<<endl;  
+	it++;
+}
+```
+
+2）反向迭代器
+
+反向迭代器是一种反向遍历容器的迭代器。也就是，从最后一个元素到第一个元素遍历容器。反向迭代器将自增（和自减）的含义反过来了：对于反向迭代器，++ 运算将访问前一个元素，而 -- 运算则访问下一个元素。
+
+回想一下，所有容器都定义了 begin 和 end 成员，分别返回指向容器首元素和尾元素下一位置的迭代器。容器还定义了 rbegin 和 rend 成员，分别返回指向容器尾元素和首元素前一位置的反向迭代器。
+
+![img](http://hi.csdn.net/attachment/201111/4/0_1320396914KpO5.gif)
+
+
+
+
+
