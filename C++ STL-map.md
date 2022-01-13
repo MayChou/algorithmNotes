@@ -149,3 +149,5 @@ iterator erase（iterator first，iterator last）；	//删除一个范围，fir
 **map 的 sort 问题：**
 
  Map 中的元素是自动按 key 升序排序,所以不能对 map 用 sort 函数：
+
+注意在stl容器中只有vector，string，deque是可以使用sort的。因为像set，map这种容器是用红黑树实现的，元素本身有序，故不允许使用sort
