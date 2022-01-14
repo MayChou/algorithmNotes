@@ -121,3 +121,16 @@ a.swap(b);//a和b中数据进行整体交换
 
 ​	
 
+### 5. C++11新特性
+
+emplace()函数：
+
+用于在 vector 容器指定位置之前插入一个新的元素。再次强调，emplace() 每次只能插入一个元素，而不是多个。
+
+```c++
+iterator emplace (const_iterator pos, args...);
+
+ demo1.emplace(demo1.begin(), 3);//在vector开头插入3
+```
+
+就是 emplace() 在插入元素时，是在容器的指定位置直接构造元素，而不是先单独生成，再将其复制（或移动）到容器中。因此，在实际使用中，推荐大家优先使用 emplace()。
