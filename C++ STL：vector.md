@@ -94,7 +94,38 @@ value.front()//返回首元素的引用
 value.back()//返回末尾位置的元素
 ```
 
+**查找元素：**
 
+不同于map（map有find方法），vector本身是没有find这一方法，其find是依靠algorithm来实现的。
+
+```c++
+#include <iostream>
+#include <algorithm>
+#include <vector>
+ 
+int main()
+{
+    using namespace std;
+ 
+    vector<int> vec;
+ 
+    vec.push_back(1);
+    vec.push_back(2);
+    vec.push_back(3);
+    vec.push_back(4);
+    vec.push_back(5);
+    vec.push_back(6);
+ 
+    vector<int>::iterator it = find(vec.begin(), vec.end(), 6);
+ 
+    if (it != vec.end())
+        cout<<*it<<endl;
+    else
+        cout<<"can not find"<<endl;
+ 
+    return 0;
+}
+```
 
 其他：
 
