@@ -118,3 +118,30 @@ auto rc = q.front();
 
 
 310 最小高度树，运用到了图的知识，看完图的章节再回头来做
+
+**235 二叉搜索树最近的公共结点**
+
+//利用二叉搜索树中序有序的特性来解决
+
+```c++
+//可以利用二叉搜索树的特性
+class Solution {
+    TreeNode res = null;
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        
+        lca(root, p , q);
+        return res;
+    }
+    
+    public void lca(TreeNode root, TreeNode p , TreeNode q){
+        if((root.val - p.val)*(root.val - q.val) <= 0){
+            res = root;
+        }else if(root.val < p.val && root.val < q.val){
+            lca(root.right, p , q);
+        }else{
+            lca(root.left, p , q);
+        }
+    }
+}
+```
+
