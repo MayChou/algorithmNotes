@@ -145,3 +145,37 @@ class Solution {
 }
 ```
 
+### 386. 字典序对数字排序
+
+给你一个整数 `n` ，按字典序返回范围 `[1, n]` 内所有整数。
+
+你必须设计一个时间复杂度为 `O(n)` 且使用 `O(1)` 额外空间的算法。
+
+**利用深度优先搜索：**
+
+如果我们将 hh 位的所有整数看做如下所示 hh 层的 kk 叉树（k \le 10k≤10），[1,n][1,n] 范围内的所有整数的字典序实际上就是这棵 k 叉树的先序遍历顺序。
+
+![](../pictures/10.png)
+
+
+
+**利用字典序的规律直接解决：**
+
+```c++
+class Solution {
+    vector<int> ans;
+public:
+    void dfs(int num, int& n) {
+        if (num > n) return;
+        ans.push_back(num);
+        for (int i = 0; i <= 9; ++i) dfs(num * 10 + i, n);
+    }
+
+    vector<int> lexicalOrder(int n) {
+        for (int i = 1; i <= 9; ++i) dfs(i, n);
+        return ans;
+    }
+};
+
+```
+
