@@ -12,3 +12,27 @@ std::vector<string> data {12}; // Container has 12 elements
 std::fill (std::begin (data), std::end (data), "none"); // Set all elements to "none"
 ```
 
+### c++11新特性：循环
+
+正常我们想要输出一个数组的全部元素时，需要采用以下的方法：
+
+```c++
+//随机定义的数组
+int array[10] = { 54, 23, 78, 9, 15, 18, 63, 33, 87, 66 };
+
+for (int i = 0; i < 10; i++) {
+	cout << array[i] << " ";		//输出：54 23 78 9 15 18 63 33 87 66
+}
+```
+
+在C++11中，我们可以在for循环**填加冒号 :** 来简化这一过程：
+
+```c++
+//随机定义的数组
+int array[10] = { 54, 23, 78, 9, 15, 18, 63, 33, 87, 66 };
+	
+for (auto a : array) {
+	cout << a << " ";		//输出：54 23 78 9 15 18 63 33 87 66
+}
+```
+
