@@ -117,6 +117,61 @@ for(auto y:graph[u]){
 
 注意： 二分图问题也是用深度优先搜索和着色方法解决。（886. 可能的二分法）
 
+#### 方法二：拓扑排序
+
+根据题意，若一个节点没有出边，则该节点是安全的；若一个节点出边相连的点都是安全的，则该节点也是安全的。
+
+根据这一性质，我们可以将图中所有边反向，得到一个反图，然后在反图上运行拓扑排序。
+
+具体来说，首先得到反图 rg 及其入度数组 inDeg。将所有入度为 0 的点加入队列，然后不断取出队首元素，将其出边相连的点的入度减一，若该点入度减一后为 0，则将该点加入队列，如此循环直至队列为空。循环结束后，所有入度为 0 的节点均为安全的。我们遍历入度数组，并将入度为 0 的点加入答案列表。
+
+```c++
+class Solution {
+public:
+    vector<int> eventualSafeNodes(vector<vector<int>> &graph) {
+        int n = graph.size();
+        vector<vector<int>> rg(n);
+        vector<int> inDeg(n);
+        for (int x = 0; x < n; ++x) {
+            for (int y : graph[x]) {
+                rg[y].push_back(x);
+            }
+            inDeg[x] = graph[x].size();
+        }
+
+        queue<int> q;
+        for (int i = 0; i < n; ++i) {
+            if (inDeg[i] == 0) {
+                q.push(i);
+            }
+        }
+        while (!q.empty()) {
+            int y = q.front();
+            q.pop();
+            for (int x : rg[y]) {
+                if (--inDeg[x] == 0) {
+                    q.push(x);
+                }
+            }
+        }
+
+        vector<int> ans;
+        for (int i = 0; i < n; ++i) {
+            if (inDeg[i] == 0) {
+                ans.push_back(i);
+            }
+        }
+        return ans;
+    }
+};
+```
+
+
+
+
+
+
+
 ### 785. 判断二分图
 
 题目：二分图 定义：如果能将一个图的节点集合分割成两个独立的子集 A 和 B ，并使图中的每一条边的两个节点一个来自 A 集合，一个来自 B 集合，就将这个图称为 二分图 。
