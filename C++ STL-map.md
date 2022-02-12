@@ -151,3 +151,29 @@ iterator erase（iterator first，iterator last）；	//删除一个范围，fir
  Map 中的元素是自动按 key 升序排序,所以不能对 map 用 sort 函数：
 
 注意在stl容器中只有vector，string，deque是可以使用sort的。因为像set，map这种容器是用红黑树实现的，元素本身有序，故不允许使用sort
+
+## unordered_map容器用法详解
+
+### 定义：
+
+指的是 unordered_map 容器不会像 map 容器那样对存储的数据进行排序。换句话说，unordered_map 容器和 map 容器仅有一点不同，即 map 容器中存储的数据是有序的，而 unordered_map 容器中是无序的。
+
+但由于 unordered_map 容器底层采用的是哈希表存储结构，该结构本身不具有对数据的排序功能，所以此容器内部不会自行对存储的键值对进行排序。
+
+具体来讲，unordered_map 容器和 map 容器一样，以键值对（pair类型）的形式存储数据，存储的各个键值对的键互不相同且不允许被修改。
+
+### 使用：
+
+引入头文件：
+
+```c++
+#include <unordered_map>
+using namespace std;
+```
+
+声明变量：
+
+```c++
+std::unordered_map<std::string, std::string> umap;
+```
+
