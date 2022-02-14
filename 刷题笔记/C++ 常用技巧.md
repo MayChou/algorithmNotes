@@ -36,3 +36,17 @@ for (auto a : array) {
 }
 ```
 
+
+### resize()函数
+c++中序列式容器的一个共性函数，
+vv.resize(int n,element)表示调整容器vv的大小为n，扩容后的每个元素的值为element，默认为0
+resize()会改变容器的容量和当前元素个数
+
+```c++
+vector<vector<int>> edges;
+vector<int> indeg;
+ bool canFinish(int numCourses, vector<vector<int>>& prerequisites) {
+        edges.resize(numCourses);
+        indeg.resize(numCourses);
+}
+```
