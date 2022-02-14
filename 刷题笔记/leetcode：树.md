@@ -384,4 +384,91 @@ public:
 
 };
 ```
+## 127\. 二叉树中的最大路径和
+
+题目：
+
+路径 被定义为一条从树中任意节点出发，沿父节点-子节点连接，达到任意节点的序列。同一个节点在一条路径序列中 至多出现一次 。该路径 至少包含一个 节点，且不一定经过根节点。
+
+路径和 是路径中各节点值的总和。
+
+给你一个二叉树的根节点 root ，返回其 最大路径和 。
+
+```c++
+输入：root = [1,2,3]
+输出：6
+解释：最优路径是 2 -> 1 -> 3 ，路径和为 2 + 1 + 3 = 6
+```
+
+**方法一：递归**
+
+首先，考虑实现一个简化的函数 maxGain(node)，该函数计算二叉树中的一个节点的最大贡献值，具体而言，就是在以该节点为根节点的子树中寻找以该节点为起点的一条路径，使得该路径上的节点值之和最大。 具体而言，该函数的计算如下。 空节点的最大贡献值等于 00。 非空节点的最大贡献值等于节点值与其子节点中的最大贡献值之和（对于叶节点而言，最大贡献值等于节点值）。
+
+```c++
+class Solution {
+    int maxSum = Integer.MIN_VALUE;
+
+    public int maxPathSum(TreeNode root) {
+        maxGain(root);
+        return maxSum;
+    }
+
+    public int maxGain(TreeNode node) {
+        if (node == null) {
+            return 0;
+        }
+        
+        // 递归计算左右子节点的最大贡献值
+        // 只有在最大贡献值大于 0 时，才会选取对应子节点
+        int leftGain = Math.max(maxGain(node.left), 0);
+        int rightGain = Math.max(maxGain(node.right), 0);
+
+        // 节点的最大路径和取决于该节点的值与该节点的左右子节点的最大贡献值
+        int priceNewpath = node.val + leftGain + rightGain;
+
+        // 更新答案
+        maxSum = Math.max(maxSum, priceNewpath);
+
+        // 返回节点的最大贡献值
+        return node.val + Math.max(leftGain, rightGain);
+    }
+}
+```
+
+## 337\. 打家劫舍|||
+
+小偷又发现了一个新的可行窃的地区。这个地区只有一个入口，我们称之为 root 。 除了 root 之外，每栋房子有且只有一个“父“房子与之相连。一番侦察之后，聪明的小偷意识到“这个地方的所有房屋的排列类似于一棵二叉树”。 如果 两个直接相连的房子在同一天晚上被打劫 ，房屋将自动报警。 给定二叉树的 root 。返回 在不触动警报的情况下 ，小偷能够盗取的最高金额 。
+
+来源：力扣（LeetCode） 链接：https://leetcode-cn.com/problems/house-robber-iii 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+
+**解题思路：DFS+动态规划**
+
+简化一下这个问题：一棵二叉树，树上的每个点都有对应的权值，每个点有两种状态（选中和不选中），问在不能同时选中有父子关系的点的情况下，能选中的点的最大权值和是多少。 我们可以用 f(o)f(o) 表示选择 oo 节点的情况下，oo 节点的子树上被选择的节点的最大权值和；g(o)g(o) 表示不选择 oo 节点的情况下，oo 节点的子树上被选择的节点的最大权值和；ll 和 rr 代表 oo 的左右孩子。
+
+- 当 oo 被选中时，oo 的左右孩子都不能被选中，故 oo 被选中情况下子树上被选中点的最大权值和为 ll 和 rr 不被选中的最大权值和相加，即 f(o) = g(l) + g(r)
+    
+- 当 oo 不被选中时，oo 的左右孩子可以被选中，也可以不被选中。对于 oo 的某个具体的孩子 xx，它对 oo 的贡献是 xx 被选中和不被选中情况下权值和的较大值。故 g(o) = max { f(l) , g(l)}+max{ f(r) , g(r)}
+    
+
+```c++
+class Solution {
+public:
+    unordered_map <TreeNode*, int> f, g;
+
+    void dfs(TreeNode* node) {
+        if (!node) {
+            return;
+        }
+        dfs(node->left);
+        dfs(node->right);
+        f[node] = node->val + g[node->left] + g[node->right];
+        g[node] = max(f[node->left], g[node->left]) + max(f[node->right], g[node->right]);
+    }
+
+    int rob(TreeNode* root) {
+        dfs(root);
+        return max(f[root], g[root]);
+    }
+};
+```
 
